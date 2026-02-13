@@ -1,0 +1,197 @@
+// Variables spécifiques à premiumindustry.ca
+:root {
+    --premium-green: #a1cc3b;
+    --premium-green-light: #b8db6c;
+    --premium-green-dark: #8ab32a;
+    --premium-dark: #1a1a1a;
+    --premium-gray: #4a4a4a;
+    --premium-gray-light: #f8f9fa;
+}
+
+// Style navigation premium
+.premium-nav, 
+.layout-topbar {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    
+    a, .topbar-menubutton {
+        color: var(--premium-dark);
+        transition: color 0.2s;
+        
+        &:hover {
+            color: var(--premium-green);
+        }
+    }
+}
+
+// Style menu latéral
+.layout-sidebar {
+    .layout-menu {
+        font-family: 'Montserrat', sans-serif;
+        
+        a {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            
+            &.active-route {
+                color: var(--premium-green);
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// Style boutons PrimeNG
+.p-button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    
+    &.p-button-outlined {
+        border-width: 2px;
+    }
+}
+
+// Style cartes produits
+.product-card {
+    .product-badge {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        color: var(--premium-green);
+    }
+    
+    .product-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        letter-spacing: 1.5px;
+        margin: 0.5rem 0;
+    }
+}
+
+// Style données techniques
+.tech-specs {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--premium-gray-light);
+    padding: 1.5rem;
+    border-radius: 4px;
+    
+    .spec-label {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        color: #666;
+    }
+    
+    .spec-value {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--premium-dark);
+    }
+}
+
+// Style certifications
+.certification-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    padding: 0.35rem 0.9rem;
+    background: var(--premium-gray-light);
+    border-left: 3px solid var(--premium-green);
+    border-radius: 0;
+    color: var(--premium-dark);
+}
+
+// Style hero section
+.hero-section {
+    h1, .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 300;
+        letter-spacing: normal;
+        text-transform: none;
+    }
+}
+
+// Classes utilitaires
+.text-premium-green {
+    color: var(--premium-green);
+}
+
+.bg-premium-green {
+    background-color: var(--premium-green);
+}
+
+.font-premium {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-premium-light {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.uppercase-premium {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+// Style pour les tableaux de spécifications
+.specs-table {
+    font-family: 'Open Sans', sans-serif;
+    
+    th {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.85rem;
+        background: var(--premium-gray-light);
+    }
+    
+    td {
+        font-weight: 400;
+    }
+}
+
+// Style pied de page
+.layout-footer {
+    font-family: 'Open Sans', sans-serif;
+    
+    .footer-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-link {
+        font-weight: 400;
+        font-size: 0.9rem;
+        
+        &:hover {
+            color: var(--premium-green);
+        }
+    }
+}

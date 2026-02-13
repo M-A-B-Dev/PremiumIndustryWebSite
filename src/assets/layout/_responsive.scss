@@ -1,0 +1,139 @@
+/* Très grands écrans (>= 1960px) */
+@media screen and (min-width: 1960px) {
+    .layout-main,
+    .landing-wrapper {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* Desktop (>= 992px) */
+@media (min-width: 992px) {
+    .layout-wrapper {
+        .layout-main-container {
+            margin-left: 0;
+            padding: 0;  /* ZÉRO padding */
+            width: 100%;
+        }
+
+        .layout-main {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;  /* ZÉRO padding */
+        }
+
+        .layout-mask {
+            display: none;
+        }
+    }
+
+    /* Cacher la sidebar */
+    .layout-sidebar {
+        display: none;
+    }
+}
+
+/* Mobile (<= 991px) */
+@media (max-width: 991px) {
+    .blocked-scroll {
+        overflow: hidden;
+    }
+
+    .layout-wrapper {
+        .layout-main-container {
+            margin-left: 0;
+            padding: 0;  /* ZÉRO padding même sur mobile */
+            width: 100%;
+        }
+
+        .layout-main {
+            width: 100%;
+            max-width: none;
+            padding: 0;  /* ZÉRO padding */
+        }
+
+        /* Masquer la sidebar */
+        .layout-sidebar {
+            display: none;
+        }
+
+        /* Overlay mask */
+        .layout-mask {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 998;
+            width: 100%;
+            height: 100%;
+            background-color: var(--maskbg);
+        }
+
+        &.layout-mobile-active {
+            .layout-mask {
+                display: block;
+            }
+        }
+    }
+
+    /* Ajustements topbar mobile */
+    .layout-topbar {
+        .layout-topbar-nav {
+            display: none;
+        }
+
+        .layout-topbar-menu-button {
+            display: block;
+        }
+    }
+}
+
+/* Petits mobiles (<= 576px) */
+@media (max-width: 576px) {
+    .layout-wrapper {
+        .layout-main-container {
+            padding: 0;  /* ZÉRO padding */
+        }
+        
+        .layout-main {
+            padding: 0;  /* ZÉRO padding */
+        }
+    }
+}
+
+/* Classes utilitaires */
+.hidden {
+    display: none !important;
+}
+
+/* Desktop only */
+@media (min-width: 992px) {
+    .lg\:hidden {
+        display: none !important;
+    }
+    
+    .lg\:block {
+        display: block !important;
+    }
+    
+    .lg\:flex {
+        display: flex !important;
+    }
+}
+
+/* Mobile only */
+@media (max-width: 991px) {
+    .sm\:hidden {
+        display: none !important;
+    }
+    
+    .sm\:block {
+        display: block !important;
+    }
+    
+    .sm\:flex {
+        display: flex !important;
+    }
+}
