@@ -1,0 +1,185 @@
+<!-- Section Hero -->
+<div
+    class="relative lg:p-20 p-12 text-surface-0 dark:text-surface-900 overflow-hidden"
+    style="
+        background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.9) 68.93%),
+            url('https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/cta/cta-8.jpg') lightgray 20% / cover no-repeat;
+    "
+>
+    <div class="text-center relative">
+        <div class="text-5xl mb-8 text-surface-0 flex justify-center flex-wrap">
+            <div class="font-bold">Nos&nbsp;</div>
+            Réalisations
+        </div>
+        <div class="text-xl text-surface-0/70 leading-normal text-center mx-auto mb-8 max-w-lg">
+            Découvrez nos projets d'exception, alliant savoir-faire artisanal et technologies modernes pour des résultats uniques.
+        </div>
+    </div>
+</div>
+
+<!-- Section Réalisations - CARDS AVEC IMAGES PARFAITEMENT IDENTIQUES -->
+<div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-12 lg:px-20">
+    <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
+            <!-- Grille 3 colonnes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @for (realisation of realisations; track realisation.id) {
+                <div 
+                    class="bg-surface-0 dark:bg-surface-900 rounded-2xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl h-full"
+                    (click)="openDialog(realisation)"
+                >
+                    <!-- IMAGE: Aspect ratio 4/3 PARFAIT - TOUTES LES IMAGES ONT LA MÊME TAILLE -->
+                    <div class="w-full aspect-4/3 overflow-hidden rounded-t-2xl">
+                        <div 
+                            class="w-full h-full bg-cover bg-center bg-no-repeat"
+                            [style.background-image]="'url(' + realisation.image + ')'"
+                        ></div>
+                    </div>
+
+                    <!-- Contenu -->
+                    <div class="px-6 pt-6 pb-4 flex flex-col gap-4 flex-1">
+                        <!-- Titre et date -->
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1 text-surface-900 dark:text-surface-0 text-xl font-medium leading-tight">
+                                {{ realisation.name }}
+                            </div>
+                            <div class="text-surface-500 dark:text-surface-400 text-sm font-medium whitespace-nowrap">
+                                {{ realisation.date }}
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="text-surface-500 dark:text-surface-400 text-base leading-normal">
+                            {{ realisation.description }}
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog Réalisation - DESIGN PREMIUM AUDIO EXPERIENCE -->
+<p-dialog
+    [(visible)]="dialogVisible"
+    [modal]="true"
+    [style]="{ width: '90vw', maxWidth: '1400px' }"
+    [contentStyle]="{ 
+        padding: '0', 
+        'border-radius': '12px', 
+        'max-height': '90vh',
+        'overflow-y': 'auto'
+    }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    position="center"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closeDialog()"
+>
+    @if (selectedRealisation) {
+    <!-- DESIGN: Premium Audio Experience -->
+    <div class="bg-surface-0 dark:bg-surface-950 px-6 py-20 md:px-12 lg:px-20 lg:p-20">
+        <div class="flex flex-col lg:flex-row justify-start items-start gap-6 md:gap-8 lg:gap-12">
+            
+            <!-- Colonne gauche : Contenu texte -->
+            <div class="w-full lg:flex-1 py-4 flex flex-col justify-start items-start gap-8 lg:gap-12">
+                
+                <!-- Titre et description -->
+                <div class="w-full flex flex-col justify-start items-start gap-4">
+                    <div class="w-full text-surface-900 dark:text-surface-0 text-2xl md:text-3xl font-semibold leading-tight">
+                        {{ selectedRealisation.name }}
+                    </div>
+                    <div class="w-full text-surface-500 dark:text-surface-400 text-lg md:text-xl font-normal leading-normal">
+                        {{ selectedRealisation.description }}
+                    </div>
+                </div>
+
+                <!-- Trois caractéristiques avec icônes -->
+                <div class="w-full flex flex-col justify-start items-start gap-6">
+                    
+                    <!-- Lieu d'installation -->
+                    <div class="w-full p-2 flex justify-start items-start gap-4 md:gap-6">
+                        <i class="pi pi-map-marker text-xl md:text-2xl text-surface-900 dark:text-surface-0 mt-1"></i>
+                        <div class="flex-1 flex flex-col justify-start items-start gap-2">
+                            <div class="w-full text-surface-900 dark:text-surface-0 text-lg md:text-xl font-medium leading-tight">
+                                Lieu d'installation
+                            </div>
+                            <div class="w-full text-surface-500 dark:text-surface-400 text-base md:text-xl font-normal leading-normal">
+                                {{ selectedRealisation.lieu }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Architecte & Entrepreneur -->
+                    <div class="w-full p-2 flex justify-start items-start gap-4 md:gap-6">
+                        <i class="pi pi-building text-xl md:text-2xl text-surface-900 dark:text-surface-0 mt-1"></i>
+                        <div class="flex-1 flex flex-col justify-start items-start gap-2">
+                            <div class="w-full text-surface-900 dark:text-surface-0 text-lg md:text-xl font-medium leading-tight">
+                                Architecte & Entrepreneur
+                            </div>
+                            <div class="w-full text-surface-500 dark:text-surface-400 text-base md:text-xl font-normal leading-normal">
+                                {{ selectedRealisation.architecte }} • {{ selectedRealisation.entrepreneur }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Produits & Finitions -->
+                    <div class="w-full p-2 flex justify-start items-start gap-4 md:gap-6">
+                        <i class="pi pi-box text-xl md:text-2xl text-surface-900 dark:text-surface-0 mt-1"></i>
+                        <div class="flex-1 flex flex-col justify-start items-start gap-2">
+                            <div class="w-full text-surface-900 dark:text-surface-0 text-lg md:text-xl font-medium leading-tight">
+                                Produits & Finitions
+                            </div>
+                            <div class="w-full flex flex-col gap-3">
+                                <!-- Produits utilisés - BADGES -->
+                                <div class="flex flex-wrap gap-2">
+                                    @for (produit of selectedRealisation.produitsUtilises; track $index) {
+                                    <span class="inline-flex px-3 py-1.5 bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-sm rounded-full">
+                                        {{ produit }}
+                                    </span>
+                                    }
+                                </div>
+                                <!-- Finitions - BADGES -->
+                                <div class="flex flex-wrap gap-2">
+                                    @for (finition of selectedRealisation.finitions; track $index) {
+                                    <span class="inline-flex px-3 py-1.5 bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300 text-sm rounded-full">
+                                        {{ finition }}
+                                    </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton retour -->
+                <div class="w-full mt-4">
+                    <button 
+                        pButton 
+                        severity="secondary" 
+                        class="p-button-outlined"
+                        (click)="closeDialog()"
+                    >
+                        <i class="pi pi-arrow-left mr-2"></i>
+                        <span>Retour aux réalisations</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Colonne droite : IMAGE AVEC ASPECT RATIO FIXE 4/3 -->
+            <div class="w-full lg:flex-1 order-first lg:order-last">
+                <div class="w-full aspect-4/3 rounded-2xl shadow-xl overflow-hidden">
+                    <img 
+                        class="w-full h-full object-cover" 
+                        [src]="selectedRealisation.image" 
+                        [alt]="selectedRealisation.name"
+                    />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    }
+</p-dialog>

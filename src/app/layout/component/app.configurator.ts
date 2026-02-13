@@ -36,6 +36,22 @@ declare type SurfacesType = {
     };
 };
 
+// Palette personnalisée pour la couleur lime #a1cc3b
+const customLimePalette = {
+    0: '#ffffff',
+    50: '#f7fee7',
+    100: '#ecfccb',
+    200: '#d9f99d',
+    300: '#bef264',
+    400: '#a3e635',
+    500: '#a1cc3b', // Votre couleur spécifique #a1cc3b
+    600: '#8bb32e',
+    700: '#759a26',
+    800: '#5f811e',
+    900: '#496816',
+    950: '#334f0e'
+};
+
 @Component({
     selector: 'app-configurator',
     standalone: true,
@@ -272,14 +288,22 @@ export class AppConfigurator {
 
     primaryColors = computed<SurfacesType[]>(() => {
         const presetPalette = presets[this.layoutService.layoutConfig().preset as KeyOfType<typeof presets>].primitive;
-        const colors = ['emerald', 'green', 'lime', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
-        const palettes: SurfacesType[] = [{ name: 'noir', palette: {} }];
+        const colors = ['emerald', 'green', 'orange', 'amber', 'yellow', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
+        const palettes: SurfacesType[] = [
+            { name: 'noir', palette: {} },
+            { 
+                name: 'lime', 
+                palette: customLimePalette // Palette personnalisée avec #a1cc3b
+            }
+        ];
 
         colors.forEach((color) => {
-            palettes.push({
-                name: color,
-                palette: presetPalette?.[color as KeyOfType<typeof presetPalette>] as SurfacesType['palette']
-            });
+            if (color !== 'lime') { // Évite la duplication
+                palettes.push({
+                    name: color,
+                    palette: presetPalette?.[color as KeyOfType<typeof presetPalette>] as SurfacesType['palette']
+                });
+            }
         });
 
         return palettes;
@@ -338,10 +362,17 @@ export class AppConfigurator {
                 }
             };
         } else {
+            // Utilise la palette personnalisée pour le lime
+            let primaryPalette = color.palette;
+            
+            if (color.name === 'lime') {
+                primaryPalette = customLimePalette;
+            }
+
             if (preset === 'Nora') {
                 return {
                     semantic: {
-                        primary: color.palette,
+                        primary: primaryPalette,
                         colorScheme: {
                             light: {
                                 primary: {
@@ -377,7 +408,7 @@ export class AppConfigurator {
             } else {
                 return {
                     semantic: {
-                        primary: color.palette,
+                        primary: primaryPalette,
                         colorScheme: {
                             light: {
                                 primary: {

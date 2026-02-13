@@ -1,0 +1,63 @@
+// Animation keyframes
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+// Classe d'animation
+.animate-infinite-scroll {
+  animation: infinite-scroll linear infinite;
+}
+
+// Durées d'animation responsives
+.animate-duration-5000 {
+  animation-duration: 5s;
+}
+
+@media (min-width: 768px) {
+  .animate-duration-5000 {
+    animation-duration: 10s !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-duration-5000 {
+    animation-duration: 20s !important;
+  }
+}
+
+// Version alternative avec les classes spécifiques
+.animate-duration-5000 {
+  animation-duration: 5s;
+}
+
+.animate-duration-10000 {
+  animation-duration: 10s;
+}
+
+.animate-duration-20000 {
+  animation-duration: 20s;
+}
+
+// Version responsive directe sur l'élément
+.animate-infinite-scroll {
+  animation: infinite-scroll linear infinite;
+  animation-duration: 5s;
+  
+  @media (min-width: 768px) {
+    animation-duration: 10s;
+  }
+  
+  @media (min-width: 1024px) {
+    animation-duration: 20s;
+  }
+}
+
+// Si vous voulez que l'animation s'arrête au hover (optionnel)
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}

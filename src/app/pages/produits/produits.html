@@ -1,0 +1,178 @@
+<!-- Section Hero -->
+<div
+    class="relative lg:p-20 p-12 text-surface-0 dark:text-surface-900 overflow-hidden"
+    style="
+        background:
+            linear-gradient(90deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.9) 68.93%),
+            url('https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/cta/cta-8.jpg') lightgray 20% / cover no-repeat;
+    "
+>
+    <div class="text-center relative">
+        <div class="text-5xl mb-8 text-surface-0 flex justify-center flex-wrap">
+            <div class="font-bold">Nos&nbsp;</div>
+            Produits
+        </div>
+        <div class="text-xl text-surface-0/70 leading-normal text-center mx-auto mb-8 max-w-lg">Découvrez notre gamme complète de portes et fenêtres, alliant innovation technologique et design d'exception pour répondre à tous vos besoins.</div>
+    </div>
+</div>
+
+<div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-12 lg:px-20">
+    <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @for (produit of produits; track produit.id) {
+                <div class="bg-surface-0 dark:bg-surface-900 rounded-2xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl" (click)="showDialog(produit)">
+                    <!-- Image -->
+                    <div class="h-[24.3rem] overflow-hidden" [style.background-image]="'url(' + getMainImage(produit) + ')'" style="background-size: cover; background-position: center; border-radius: 16px 16px 0 0"></div>
+
+                    <!-- Contenu -->
+                    <div class="px-6 pt-6 pb-4 flex flex-col gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-1 text-surface-900 dark:text-surface-0 text-xl font-medium leading-tight">{{ produit.name }}</div>
+                        </div>
+
+                        <div class="text-surface-500 dark:text-surface-400 text-base leading-normal">{{ produit.role }}</div>
+
+                        <div class="text-surface-900 dark:text-surface-0 text-xl font-medium leading-normal">{{ produit.prix | currency:'CAD':'symbol':'1.0-0' }}</div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog Produit -->
+<p-dialog
+    [(visible)]="dialogVisible"
+    [modal]="true"
+    [style]="{ width: '90vw', maxWidth: '1200px' }"
+    [contentStyle]="{ 
+    padding: '0', 
+    'border-radius': '12px', 
+    'max-height': '90vh',
+    'overflow-y': 'auto'
+  }"
+    [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+    position="center"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closeDialog()"
+>
+    @if (selectedProduit) {
+    <div class="bg-surface-0 dark:bg-surface-950 px-4 py-12 md:px-6 md:py-16 lg:px-20 lg:py-24">
+        <!-- Section Images -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 lg:mb-6">
+            <!-- Image principale -->
+            <img class="w-full h-70 sm:h-80 md:h-95 lg:h-105.75 rounded-lg object-cover" [src]="selectedProduit.images[0]" [alt]="selectedProduit.name" />
+
+            <!-- Miniatures d'images -->
+            <div class="grid grid-cols-2 gap-3 md:gap-4 lg:gap-8">
+                @for (image of selectedProduit.images.slice(1, 5); track $index) {
+                <img class="w-full h-30 sm:h-35 md:h-45-[197px] rounded-lg object-cover" [src]="image" [alt]="selectedProduit.name + ' vue ' + ($index + 2)" />
+                }
+            </div>
+        </div>
+
+        <!-- Informations produit -->
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            <!-- Colonne gauche : Description et caractéristiques -->
+            <div class="flex-1 flex flex-col gap-6 lg:gap-8">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h1 class="text-3xl font-semibold leading-tight text-surface-900 dark:text-surface-0">{{ selectedProduit.name }}</h1>
+                        <p class="text-surface-500 dark:text-surface-400 text-lg mt-1">{{ selectedProduit.role }}</p>
+                    </div>
+                </div>
+
+                <div class="text-base leading-normal flex flex-col gap-4">
+                    <span class="text-surface-500 dark:text-surface-400 font-normal"> {{ selectedProduit.description }} </span>
+
+                    <!-- Caractéristiques -->
+                    <div class="flex flex-col gap-4">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Caractéristiques techniques</span>
+                        <ul class="pl-4 text-surface-500 dark:text-surface-400 font-normal list-disc space-y-1">
+                            <li><strong>Matériaux :</strong> {{ selectedProduit.materiaux }}</li>
+                            <li><strong>Dimensions :</strong> {{ selectedProduit.dimensions }}</li>
+                            <li><strong>Résistance :</strong> {{ selectedProduit.resistance }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Finitions disponibles -->
+                    <div class="flex flex-col gap-4">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Finitions disponibles</span>
+                        <div class="flex flex-wrap gap-3">
+                            @for (finition of getProduitFinitions(selectedProduit); track finition.id) {
+                            <div class="flex flex-col items-center gap-2">
+                                <div
+                                    class="w-12 h-12 rounded-full flex items-center justify-center text-xl border-2 border-surface-200 dark:border-surface-700"
+                                    [style]="{
+                        'background': finition.color,
+                        'color': finition.textColor || 'inherit'
+                      }"
+                                    [title]="finition.name"
+                                >
+                                    {{ finition.icon }}
+                                </div>
+                                <span class="text-xs text-surface-600 dark:text-surface-400 font-medium text-center max-w-15 truncate"> {{ finition.name }} </span>
+                            </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Avantages -->
+                    @if (selectedProduit.avantages && selectedProduit.avantages.length > 0) {
+                    <div class="flex flex-col gap-4">
+                        <span class="text-surface-900 dark:text-surface-0 font-bold">Avantages</span>
+                        <ul class="pl-4 text-surface-500 dark:text-surface-400 font-normal list-disc space-y-1">
+                            @for (avantage of selectedProduit.avantages; track avantage) {
+                            <li>{{ avantage }}</li>
+                            }
+                        </ul>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Colonne droite : Prix, certifications et actions -->
+            <div class="flex-1 flex flex-col gap-6 lg:gap-8">
+                <!-- Prix -->
+                <div class="flex flex-col gap-3 lg:gap-4">
+                    <div class="text-3xl font-bold leading-tight text-primary-600 dark:text-primary-400">{{ selectedProduit.prix | currency:'CAD':'symbol':'1.0-0' }}</div>
+                </div>
+
+                <!-- Certifications en badges/étiquettes - Zéro scroll -->
+                <div class="flex flex-col gap-3">
+                    <div class="text-surface-900 dark:text-surface-0 text-lg font-bold leading-tight">Certifications</div>
+
+                    <div class="flex flex-wrap gap-2">
+                        @for (cert of allCertifications; track cert) {
+                        <div
+                            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium border transition-colors"
+                            [ngClass]="{
+          'bg-green-50 border-green-200 text-green-700 dark:bg-green-900/30 dark:border-green-800 dark:text-green-300': hasCertification(selectedProduit, cert),
+          'bg-surface-50 border-surface-200 text-surface-400 dark:bg-surface-900 dark:border-surface-700 dark:text-surface-500': !hasCertification(selectedProduit, cert)
+        }"
+                        >
+                            @if (hasCertification(selectedProduit, cert)) {
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            } {{ cert }}
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 mt-6">
+                    <button pButton severity="secondary" class="flex-1" (click)="closeDialog()">
+                        <i class="pi pi-arrow-left mr-2"></i>
+                        <span>Retour aux produits</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</p-dialog>

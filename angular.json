@@ -30,7 +30,7 @@
                         ],
                         "styles": [
                             "src/assets/styles.scss",
-                            "src/assets/tailwind.css"
+                          "src/assets/tailwind.css"
                         ],
                         "scripts": []
                     },

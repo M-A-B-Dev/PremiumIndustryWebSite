@@ -1,7 +1,7 @@
 import { Injectable, effect, signal, computed } from '@angular/core';
 
 export interface LayoutConfig {
-    preset: string;
+    preset: any;
     primary: string;
     surface: string | undefined | null;
     darkTheme: boolean;
@@ -23,10 +23,10 @@ interface LayoutState {
 export class LayoutService {
     layoutConfig = signal<LayoutConfig>({
         preset: 'Aura',
-        primary: 'emerald',
+        primary: 'lime',
         surface: null,
         darkTheme: false,
-        menuMode: 'static'
+        menuMode: 'overlay'
     });
 
     layoutState = signal<LayoutState>({

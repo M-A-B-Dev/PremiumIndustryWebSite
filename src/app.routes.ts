@@ -1,23 +1,41 @@
 import { Routes } from '@angular/router';
 import { AppLayout } from './app/layout/component/app.layout';
-import { Dashboard } from './app/pages/dashboard/dashboard';
-import { Documentation } from './app/pages/documentation/documentation';
-import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
+import { Accueil } from './app/pages/accueil/accueil';
+import { Produits } from './app/pages/produits/produits';
+import { Portfolio } from './app/pages/portfolio/portfolio';
+import { Contact } from './app/pages/contact/contact';
 
-export const appRoutes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         component: AppLayout,
         children: [
-            { path: '', component: Dashboard },
-            { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
-            { path: 'documentation', component: Documentation },
-            { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
+            {
+                path: '',
+                component: Accueil
+            },
+            {
+                path: 'produits',
+                component: Produits
+            },
+            {
+                path: 'portfolio',
+                component: Portfolio
+            },
+            {
+                path: 'contact',
+                component: Contact
+            }
         ]
     },
-    { path: 'landing', component: Landing },
-    { path: 'notfound', component: Notfound },
-    { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },
-    { path: '**', redirectTo: '/notfound' }
+
+    {
+        path: 'notFound',
+        component: Notfound
+    },
+    {
+        path: '**',
+        redirectTo: '/notFound'
+    }
 ];

@@ -1,0 +1,61 @@
+<div class="bg-surface-0 dark:bg-surface-950">
+    <div class="flex flex-col items-center gap-16 pb-20">
+        <div class="w-full relative h-70 overflow-hidden">
+            <div
+                class="absolute inset-0 bg-cover! bg-center! bg-no-repeat!"
+                style="background-image: url(https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/contact/contactbg.png)"
+            ></div>
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative flex justify-center items-center h-full">
+                <div class="flex flex-col items-center gap-4 px-6">
+                    <p class="text-4xl leading-tight font-semibold text-white">Contact Us</p>
+                    <p class="text-md leading-tight text-white/70 text-center max-w-md">Aenean sed adipiscing diam donec adipiscing tristique.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-12 md:gap-16 px-8 md:px-12 lg:px-20">
+            <div class="w-full shadow-inner rounded-md border border-surface-200 dark:border-surface-700 overflow-hidden">
+                <img class="w-full h-full object-cover" src="/demo/images/premiumMap.png" alt="Map" />
+            </div>
+
+            <div class="w-full md:p-7 rounded-2xl">
+                <!-- Message de confirmation (s'affiche après envoi) -->
+                <div *ngIf="submitted" class="mb-6">
+                    <p-message severity="success" 
+                               text="Message envoyé avec succès ! Nous te répondrons bientôt."
+                               styleClass="w-full"></p-message>
+                </div>
+
+                <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+                    <div class="flex flex-col gap-8">
+                        <div class="flex flex-col gap-6">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <input pInputText type="text" name="first_name" placeholder="First Name" 
+                                       [(ngModel)]="contact.first_name" class="w-full!" required />
+                                <input pInputText type="text" name="last_name" placeholder="Last Name" 
+                                       [(ngModel)]="contact.last_name" class="w-full!" required />
+                            </div>
+                            
+                            <input pInputText type="text" name="company" placeholder="Company" 
+                                   [(ngModel)]="contact.company" class="w-full!" />
+                                   
+                            <input pInputText type="email" name="email" placeholder="Email address" 
+                                   [(ngModel)]="contact.email" class="w-full!" required />
+                                   
+                            <textarea pInputTextarea name="message" placeholder="Message" 
+                                      [(ngModel)]="contact.message" rows="8" 
+                                      class="w-full! resize-none" required></textarea>
+                            
+                            <button pButton type="submit" [disabled]="loading" class="w-full!">
+                                <span pButtonLabel>
+                                    {{ loading ? 'Envoi en cours...' : 'Send Message' }}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
