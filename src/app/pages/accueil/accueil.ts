@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
     selector: 'app-accueil',
     imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, RouterModule],
     templateUrl: './accueil.html',
-    styleUrl: './accueil.scss'
+    styleUrls:['./accueil.scss']
 })
 export class Accueil {
     email: string = '';
